@@ -11,3 +11,9 @@
 0:0:0:0:0:0:0:1 - - [13/Sep/2017:17:52:16 -0500] "GET /mhuston-swe00/MyServlet HTTP/1.1" 200 521
 127.0.0.1 - - [13/Sep/2017:17:53:58 -0500] "GET / HTTP/1.1" 404 951
 0:0:0:0:0:0:0:1 - - [13/Sep/2017:17:54:00 -0500] "GET /mhuston-swe00/MyServlet HTTP/1.1" 404 997
+127.0.0.1 - - [13/Sep/2017:17:56:03 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [13/Sep/2017:17:56:03 -0500] "GET /mhuston-swe00/WEB-INF/web.xml HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1 - - [13/Sep/2017:17:56:13 -0500] "GET /mhuston-swe00/MyServlet HTTP/1.1" 200 521
+0:0:0:0:0:0:0:1 - - [13/Sep/2017:17:59:30 -0500] "GET /mhuston-swe00/MyServlet HTTP/1.1" 200 521
+0:0:0:0:0:0:0:1 - - [13/Sep/2017:17:59:51 -0500] "GET /mhuston-swe00/createEvent?username=Mitch&eventName=Testing+New+Package&date=09%2F13%2F2017&eventLocation=PKI HTTP/1.1" 200 164
+0:0:0:0:0:0:0:1 - - [13/Sep/2017:18:00:01 -0500] "GET /mhuston-swe00/MyServlet HTTP/1.1" 200 639
