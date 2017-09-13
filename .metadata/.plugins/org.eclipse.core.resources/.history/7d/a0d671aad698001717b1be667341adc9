@@ -1,0 +1,71 @@
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ListEventsServlet")
+public class ListEventsServlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+   static String             url              = "jdbc:mysql://swe-mitchellhuston.ddns.net:3306/calendar_db";
+   static String             user             = "mitchellhuston-remote";
+   static String             password         = "password";
+   static Connection         connection       = null;
+
+   public ListEventsServlet() {
+      super();
+   }
+
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      response.setContentType("text/html;charset=UTF-8");
+      try {
+         Class.forName("com.mysql.jdbc.Driver");
+      } catch (ClassNotFoundException e) {
+          response.getWriter().println("JDBC Driver not found.<br>");
+         return;
+      }
+      connection = null;
+      try {
+         connection = DriverManager.getConnection(url, user, password);
+      } catch (SQLException e) {
+    	 response.getWriter().println("Failed to make connection.<br>");
+         return;
+      }
+      if (connection != null) {
+         
+      } else {
+    	 response.getWriter().println("Failed to make connection.<br>");
+    	 return;
+      }
+      try {
+         String selectSQL = "SELECT * FROM Events ORDER BY date";
+         PreparedStatement selectAllEvents = connection.prepareStatement(selectSQL);
+         ResultSet rs = selectAllEvents.executeQuery();
+         while (rs.next()) {
+            String username = rs.getString("username");
+            String eventName = rs.getString("eventName");
+            String date = rs.getString("date");
+            String eventLocation = rs.getString("eventLocation");
+            
+            response.getWriter().append("Username: " + username + "<br>");
+            response.getWriter().append("Event Name: " + eventName + "<br>");
+            response.getWriter().append("Event Date: " + date + "<br>");
+            response.getWriter().append("Event Location: " + eventLocation + "<br><br>");
+         }
+      } catch (SQLException e) {
+    	 response.getWriter().println("SQL Query failed.<br>");
+    	 return;
+      }
+      
+   }
+
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      doGet(request, response);
+   }
+}
